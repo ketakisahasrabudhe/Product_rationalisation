@@ -176,53 +176,68 @@ class PriceOptimizer:
 
 
 
-4. ForecastingEngine
-Purpose: Predict future demand using:
+---
 
-LSTM
-ARIMA (time series model)
-Simple baseline: basic average + seasonality trend
+### 4. `ForecastingEngine`
 
-LSTM Logic:
+**Purpose:** Predict future demand using:
 
-Takes 30-day sliding windows of sales.
-Predicts next value via sequential modeling.
+- **LSTM** (Long Short-Term Memory neural network)
+- **ARIMA** (Autoregressive Integrated Moving Average)
+- **Simple baseline**: basic average + seasonality trend
 
-ARIMA Logic:
+**LSTM Logic:**
 
-(2,1,2) ARIMA captures short-term autocorrelation and trends.
+- Takes 30-day sliding windows of sales.
+- Predicts the next value via sequential modeling (deep learning).
 
-Enhancements:
+**ARIMA Logic:**
 
-Use Prophet or XGBoost with calendar events.
-Include features promo_flag, day_of_week in multivariate models.
-Use a loop to try different ARIMA parameter combinations and pick the best one using evaluation techniques.
+- Uses a (2,1,2) ARIMA model to capture short-term autocorrelation and trends.
+- Good for interpretable, statistical forecasting.
 
+**Enhancements:**
 
-5. LLMInsightGenerator
-These are just mock insights, but an LLM can be integrated over the models to generate actual insights.
-Possible improvements:
+- Use Prophet or XGBoost with calendar events.
+- Include features such as `promo_flag` and `day_of_week` in multivariate models.
+- Use an auto-selection loop to try different ARIMA (p,d,q) combinations and pick the best using AIC/BIC or cross-validation.
 
-Use real OpenAI or LLaMA-3 model for custom insight generation.
-Add feedback loop to prioritize or score each insight.
+---
 
+### 5. `LLMInsightGenerator`
 
-6. ProductRationalizationEngine
-Product Scoring:
+These are currently mock insights, but can be powered by an LLM (Large Language Model) for natural language analysis and explanation.
+
+**Possible improvements:**
+
+- Use a real OpenAI or LLaMA-3 model for custom insight generation.
+- Create a feedback loop to prioritize or score each insight based on user ratings.
+- Include domain-specific templates to improve relevance.
+
+---
+
+### 6. `ProductRationalizationEngine`
+
+**Product Scoring:**
 
 revenue_score = product_revenue / max_revenue
 profit_score = product_profit / max_profit
 engagement_score = avg_views / max_views
-Final score = 0.4 × revenue + 0.4 × profit + 0.2 × engagement
 
-Actions Based on Score:
+final_score = 0.4 * revenue_score + 0.4 * profit_score + 0.2 * engagement_score
 
-Score >= 0.7 → PROMOTE
-0.4 <= Score < 0.7 → KEEP
+* Actions Based on Score:
+
+Score ≥ 0.7 → PROMOTE
+
+0.4 ≤ Score < 0.7 → KEEP
+
 Score < 0.4 → REVIEW
 
-Possible improvements:
+**Possible improvements:**
 
-Integrate classification model to learn optimal thresholds.
-Show rationale in a sentence (e.g., "High profit but low engagement").
+Use a trained classification model (e.g., decision tree or logistic regression) to learn thresholds based on historical outcomes.
 
+Display rationale for each decision in natural language, e.g.:
+
+“High profit but low engagement — suggest increasing product visibility.”
