@@ -48,6 +48,7 @@ Elasticity = corr(percent_change_price, percent_change_quantity)
 q = q_avg × (price_multiplier)^elasticity
 
 **Possible improvement:**
+Use ensemble-based demand modeling instead of fixed elasticity.
 
 Switch to improved `PriceOptimizer` using demand curve regression (see below).
 
@@ -171,9 +172,8 @@ class PriceOptimizer:
       
       return (round(optimal_price, 2), 
               f"Elasticity: {elasticity:.2f}, R²: {demand_params['r_squared']:.2f}")
-Additional improvements:
+```
 
-Use ensemble-based demand modeling instead of fixed elasticity.
 
 
 4. ForecastingEngine
