@@ -23,7 +23,7 @@ import openai
 import os
 
 
-st.set_page_config(page_title="Product Rationalization AI", layout="wide", page_icon="📊")
+st.set_page_config(page_title="Product Rationalization AI", layout="wide")
 
 class DataGenerator:
     """Generate synthetic data for testing"""
