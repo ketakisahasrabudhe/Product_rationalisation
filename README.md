@@ -50,7 +50,7 @@ q = q_avg × (price_multiplier)^elasticity
 **Possible improvement:**
 Use ensemble-based demand modeling instead of fixed elasticity.
 
-Switch to improved `PriceOptimizer` using demand curve regression (see below).
+Switch to improved `PriceOptimizer` using demand curve regression (see below). [DOne in this app already]
 
 ```python
 class PriceOptimizer:
